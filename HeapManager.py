@@ -27,12 +27,12 @@ class HeapManager:
         if(len(self.eboard) > 0):
             return heapq.heappop(self.eboard[1])
         elif(len(self.priority_students) > 0):
-            return heapq.heappop(self.priority_students[1])
+            return heapq.heappop(self.priority_students[2])
         elif(len(self.priority_community) > 0):
             return heapq.heappop(self.priority_community[1])
         elif(len(self.students) > 0):
             return heapq.heappop(self.students[2])
         elif(len(self.community) > 0):
-            return heapq.heappop(self.community[2])
+            return heapq.heappop(self.community[1])
         else:
             return -1
