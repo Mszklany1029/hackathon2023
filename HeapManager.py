@@ -19,9 +19,9 @@ class HeapManager:
                     heapq.heappush(priority_community, (-p.hours, p))
             else:
                 if(p.hours < 8):
-                    heapq.heappush(students, (-p.hours, p))
+                    heapq.heappush(students, (-p.hours, -p.student, p))
                 else:
-                    heapq.heappush(priority_students, (-p.hours, p))
+                    heapq.heappush(priority_students, (-p.hours, -p.student, p))
     
     def getNext(self):
         if(len(self.eboard) > 0):
@@ -31,8 +31,8 @@ class HeapManager:
         elif(len(self.priority_community) > 0):
             return heapq.heappop(self.priority_community[1])
         elif(len(self.students) > 0):
-            return heapq.heappop(self.students[1])
+            return heapq.heappop(self.students[2])
         elif(len(self.community) > 0):
-            return heapq.heappop(self.community[1])
+            return heapq.heappop(self.community[2])
         else:
             return -1
