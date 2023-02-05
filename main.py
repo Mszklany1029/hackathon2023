@@ -66,9 +66,10 @@ def main():
           #print(cant_do)
           for item in cant_do:
             impossible.append((slot-52, item))
-      print(impossible)
+      #print(impossible)
 
-      
+      dj = Person(row[2], float(row[9]), grade, top5, possible, impossible) 
+      personList.append(dj)
       #0 is Monday, 6 is Sunday
 
   queue = HeapManager(personList)
