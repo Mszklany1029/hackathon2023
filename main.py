@@ -97,7 +97,7 @@ def main():
       found = False
       for movableDJ in nonfinalized:
         for time in movableDJ[2].other_time:
-          if(sched.isOpen(time[0], time[1])):
+          if((time[0], time[1]) in nextDJ.other_time and sched.isOpen(time[0], time[1])):
             sched.assignTime(time[0], time[1], movableDJ[2].name)
             sched.assignTime(movableDJ[0], movableDJ[1], nextDJ.name)
             movableDJ[0] = time[0]
