@@ -136,5 +136,8 @@ class Schedule:
     def isOpen(self, dayOfWeek, time):
         return self.schedule[dayOfWeek][time] == ""
 
+    def assignTime(self, dayOfWeek, time, name):
+        self.schedule[dayOfWeek][time] = name
+
     def show(self):
         print(tabulate(self.schedule, headers = "keys", tablefmt = "grid", showindex=self.week))
