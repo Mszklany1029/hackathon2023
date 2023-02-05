@@ -4,8 +4,10 @@ import csv
 import itertools
 from person import Person
 from HeapManager import HeapManager
+from schedule import Schedule
 
 def main():
+  sched = Schedule()
   personList = []
   with open('data/show request form sample - Form Responses 1.csv') as csv_file:
     reader = csv.reader(csv_file)
@@ -75,8 +77,18 @@ def main():
   queue = HeapManager(personList)
   nextDJ = queue.getNext()
   while(nextDJ != -1):
-    print(nextDJ.name, nextDJ.hours, nextDJ.student)
+    sched.assignTime(nextDJ.preferred_time[0][0], nextDJ.preferred_time[0][1],  nextDJ.name)
+    
+    
     nextDJ = queue.getNext()
+
+  sched.show()
+  #print(nextDJ.name, nextDJ.hours, nextDJ.student)
+  #print(sched.isOpen(0, "2330"))
+  #print(sched.isOpen(0, "1600"))
+
+  
+  
         #i, j = 10, 45
     #reader2 = csv.reader(csv_file)
     #for row in reader2:
