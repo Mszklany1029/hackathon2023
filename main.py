@@ -49,6 +49,24 @@ def main():
         if(row[i] != ""):
           top5.append((i-38, row[i][:4]))
           break
+      
+      possible = []
+      for slot in range(45, 52):
+        if(row[slot] != ""):
+          can_do = row[slot].split(", ")
+          #print(can_do)
+          for item in can_do:
+            possible.append((slot-45, item))
+      #print(possible)
+
+      impossible = []
+      for slot in range(52, 59):
+        if(row[slot] != ""):
+          cant_do = row[slot].split(", ")
+          #print(cant_do)
+          for item in cant_do:
+            impossible.append((slot-52, item))
+      print(impossible)
 
       
       #0 is Monday, 6 is Sunday
