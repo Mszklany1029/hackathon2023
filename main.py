@@ -110,7 +110,6 @@ def main():
         if(not found):
           nonfinalized.remove(movableDJ)
 
-    #print(nextDJ.name, nextDJ.hours, nextDJ.student)
     pref = False
     nextDJ = queue.getNext()
   sched.show()
