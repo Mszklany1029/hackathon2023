@@ -6,4 +6,5 @@ class Person:
         self.preferred_time = preferred_time # list in preference order
         self.other_time = other_time # list in no order
         self.bad_time = bad_time #list in no order  
+        self.scheduled = False
         #row 9 is hours
