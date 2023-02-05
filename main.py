@@ -27,6 +27,8 @@ def main():
           grade = 4
         elif row[5] == 'Graduate':
           grade = 3
+      elif row[4] == 'Eboard':
+        grade = 5
       else:
         grade = 0
       
@@ -58,7 +60,7 @@ def main():
           can_do = row[slot].split(", ")
           #print(can_do)
           for item in can_do:
-            possible.append((slot-45, item))
+            possible.append((slot-45, item[:4]))
       #print(possible)
 
       impossible = []
@@ -67,7 +69,7 @@ def main():
           cant_do = row[slot].split(", ")
           #print(cant_do)
           for item in cant_do:
-            impossible.append((slot-52, item))
+            impossible.append((slot-52, item[:4]))
       #print(impossible)
 
       dj = Person(row[2], float(row[9]), grade, top5, possible, impossible) 
@@ -75,6 +77,8 @@ def main():
       #0 is Monday, 6 is Sunday
 
   queue = HeapManager(personList)
+  nonfinalized = []
+  pref = False
   nextDJ = queue.getNext()
   while(nextDJ != -1):
     sched.assignTime(nextDJ.preferred_time[0][0], nextDJ.preferred_time[0][1],  nextDJ.name)
@@ -86,7 +90,39 @@ def main():
   #print(nextDJ.name, nextDJ.hours, nextDJ.student)
   #print(sched.isOpen(0, "2330"))
   #print(sched.isOpen(0, "1600"))
+  for time in nextDJ.preferred_time:
+    if(sched.isOpen(time[0], time[1])):
+      sched.assignTime(time[0], time[1], nextDJ.name)
+      pref = True
+      break
+    if(not pref):
+      for time in nextDJ.other_time:
+        if(sched.isOpen(time[0], time[1])):
+          sched.assignTime(time[0], time[1], nextDJ.name)
+          nonfinalized.append([time[0], time[1], nextDJ])
+          pref = True
+          break
+    if(not pref):
+      found = False
+      for movableDJ in nonfinalized:
+        for time in movableDJ[2].other_time:
+          if((time[0], time[1]) in nextDJ.other_time and sched.isOpen(time[0], time[1])):
+            sched.assignTime(time[0], time[1], movableDJ[2].name)
+            sched.assignTime(movableDJ[0], movableDJ[1], nextDJ.name)
+            movableDJ[0] = time[0]
+            movableDJ[1] = time[1]
+            found = True
+            pref = True
+            break
+        if(pref):
+          break
+        if(not found):
+          nonfinalized.remove(movableDJ)
 
+    #print(nextDJ.name, nextDJ.hours, nextDJ.student)
+    pref = False
+    nextDJ = queue.getNext()
+  sched.show()
   
   
         #i, j = 10, 45
