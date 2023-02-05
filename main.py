@@ -31,26 +31,27 @@ def main():
       top5 = []
       for i in range(10, 17):
         if(row[i] != ""):
-          top5.append(row[i][:4])
+          top5.append((i-10, row[i][:4]))
           break
       for i in range(17, 24):
         if(row[i] != ""):
-          top5.append(row[i][:4])
+          top5.append((i-17, row[i][:4]))
           break
       for i in range(24, 31):
         if(row[i] != ""):
-          top5.append(row[i][:4])
+          top5.append((i-24, row[i][:4]))
           break
       for i in range(31, 38):
         if(row[i] != ""):
-          top5.append(row[i][:4])
+          top5.append((i-31, row[i][:4]))
           break
       for i in range(38, 45):
         if(row[i] != ""):
-          top5.append(row[i][:4])
+          top5.append((i-38, row[i][:4]))
           break
 
-      print(top5)
+      
+      #0 is Monday, 6 is Sunday
 
   queue = HeapManager(personList)
   nextDJ = queue.getNext()
