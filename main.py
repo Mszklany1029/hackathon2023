@@ -81,11 +81,20 @@ def main():
   pref = False
   nextDJ = queue.getNext()
   while(nextDJ != -1):
-    for time in nextDJ.preferred_time:
-      if(sched.isOpen(time[0], time[1])):
-        sched.assignTime(time[0], time[1], nextDJ.name)
-        pref = True
-        break
+    sched.assignTime(nextDJ.preferred_time[0][0], nextDJ.preferred_time[0][1],  nextDJ.name)
+    
+    
+    nextDJ = queue.getNext()
+
+  sched.show()
+  #print(nextDJ.name, nextDJ.hours, nextDJ.student)
+  #print(sched.isOpen(0, "2330"))
+  #print(sched.isOpen(0, "1600"))
+  for time in nextDJ.preferred_time:
+    if(sched.isOpen(time[0], time[1])):
+      sched.assignTime(time[0], time[1], nextDJ.name)
+      pref = True
+      break
     if(not pref):
       for time in nextDJ.other_time:
         if(sched.isOpen(time[0], time[1])):
@@ -113,6 +122,8 @@ def main():
     pref = False
     nextDJ = queue.getNext()
   sched.show()
+  
+  
         #i, j = 10, 45
     #reader2 = csv.reader(csv_file)
     #for row in reader2:
