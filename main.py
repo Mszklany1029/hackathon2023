@@ -3,11 +3,17 @@
 import csv
 import itertools
 from person import Person
+from HeapManager import HeapManager
 
 def main():
+  personList = []
   with open('data/show request form sample - Form Responses 1.csv') as csv_file:
     reader = csv.reader(csv_file)
+    next(reader, None)
     for row in reader:
+      if row[9] == '':
+        row[9] = 0
+
       if row[4] == 'Student':
         if row[5] == 'Freshman':
           grade = 1
@@ -23,11 +29,14 @@ def main():
         grade = 0
       test_list = [2330, 1900, 2030, 700, 830]
       othertest_list = [100, 300, 500, 1430, 1600]
-      dj = Person(row[2], row[9], grade, test_list, othertest_list)
-      personList = []
+      dj = Person(row[2], float(row[9]), grade, test_list, othertest_list)
       personList.append(dj)
-      for person in personList:
-        print(person.student)
+
+  queue = HeapManager(personList)
+  nextDJ = queue.getNext()
+  while(nextDJ != -1):
+    print(nextDJ.name, nextDJ.hours, nextDJ.student)
+    nextDJ = queue.getNext()
         #i, j = 10, 45
     #reader2 = csv.reader(csv_file)
     #for row in reader2:
