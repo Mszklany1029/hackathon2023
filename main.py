@@ -77,7 +77,11 @@ def main():
   queue = HeapManager(personList)
   nextDJ = queue.getNext()
   while(nextDJ != -1):
-    sched.assignTime(nextDJ.preferred_time[0][0], nextDJ.preferred_time[0][1], nextDJ.name)
+    for time in nextDJ.preferred_time:
+      if(sched.isOpen(time[0], time[1])):
+        sched.assignTime(time[0], time[1], nextDJ.)
+        break
+    
     #print(nextDJ.name, nextDJ.hours, nextDJ.student)
     nextDJ = queue.getNext()
   sched.show()
