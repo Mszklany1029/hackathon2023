@@ -79,7 +79,7 @@ def main():
   while(nextDJ != -1):
     for time in nextDJ.preferred_time:
       if(sched.isOpen(time[0], time[1])):
-        sched.assignTime(time[0], time[1], nextDJ.)
+        sched.assignTime(time[0], time[1], nextDJ.name)
         break
     
     #print(nextDJ.name, nextDJ.hours, nextDJ.student)
