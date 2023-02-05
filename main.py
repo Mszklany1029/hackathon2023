@@ -77,14 +77,41 @@ def main():
       #0 is Monday, 6 is Sunday
 
   queue = HeapManager(personList)
+  nonfinalized = []
+  pref = False
   nextDJ = queue.getNext()
   while(nextDJ != -1):
     for time in nextDJ.preferred_time:
       if(sched.isOpen(time[0], time[1])):
         sched.assignTime(time[0], time[1], nextDJ.name)
+        pref = True
         break
-    
+    if(not pref):
+      for time in nextDJ.other_time:
+        if(sched.isOpen(time[0], time[1])):
+          sched.assignTime(time[0], time[1], nextDJ.name)
+          nonfinalized.append([time[0], time[1], nextDJ])
+          pref = True
+          break
+    if(not pref):
+      found = False
+      for movableDJ in nonfinalized:
+        for time in movableDJ[2].other_time:
+          if(sched.isOpen(time[0], time[1])):
+            sched.assignTime(time[0], time[1], movableDJ[2].name)
+            sched.assignTime(movableDJ[0], movableDJ[1], nextDJ.name)
+            movableDJ[0] = time[0]
+            movableDJ[1] = time[1]
+            found = True
+            pref = True
+            break
+        if(pref):
+          break
+        if(not found):
+          nonfinalized.remove(movableDJ)
+
     #print(nextDJ.name, nextDJ.hours, nextDJ.student)
+    pref = False
     nextDJ = queue.getNext()
   sched.show()
         #i, j = 10, 45
