@@ -60,7 +60,7 @@ def main():
           can_do = row[slot].split(", ")
           #print(can_do)
           for item in can_do:
-            possible.append((slot-45, item))
+            possible.append((slot-45, item[:4]))
       #print(possible)
 
       impossible = []
@@ -69,7 +69,7 @@ def main():
           cant_do = row[slot].split(", ")
           #print(cant_do)
           for item in cant_do:
-            impossible.append((slot-52, item))
+            impossible.append((slot-52, item[:4]))
       #print(impossible)
 
       dj = Person(row[2], float(row[9]), grade, top5, possible, impossible) 
