@@ -27,11 +27,30 @@ def main():
           grade = 3
       else:
         grade = 0
-      test_list = [2330, 1900, 2030, 700, 830]
-      othertest_list = [100, 300, 500, 1430, 1600]
-      otherothertest_list = [1,2,3,4,5,6]
-      dj = Person(row[2], float(row[9]), grade, test_list, othertest_list, otherothertest_list)
-      personList.append(dj)
+      
+      top5 = []
+      for i in range(10, 17):
+        if(row[i] != ""):
+          top5.append(row[i][:4])
+          break
+      for i in range(17, 24):
+        if(row[i] != ""):
+          top5.append(row[i][:4])
+          break
+      for i in range(24, 31):
+        if(row[i] != ""):
+          top5.append(row[i][:4])
+          break
+      for i in range(31, 38):
+        if(row[i] != ""):
+          top5.append(row[i][:4])
+          break
+      for i in range(38, 45):
+        if(row[i] != ""):
+          top5.append(row[i][:4])
+          break
+
+      print(top5)
 
   queue = HeapManager(personList)
   nextDJ = queue.getNext()
