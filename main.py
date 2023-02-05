@@ -29,7 +29,8 @@ def main():
         grade = 0
       test_list = [2330, 1900, 2030, 700, 830]
       othertest_list = [100, 300, 500, 1430, 1600]
-      dj = Person(row[2], float(row[9]), grade, test_list, othertest_list)
+      otherothertest_list = [1,2,3,4,5,6]
+      dj = Person(row[2], float(row[9]), grade, test_list, othertest_list, otherothertest_list)
       personList.append(dj)
 
   queue = HeapManager(personList)
