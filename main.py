@@ -27,6 +27,8 @@ def main():
           grade = 4
         elif row[5] == 'Graduate':
           grade = 3
+      elif row[4] == 'Eboard':
+        grade = 5
       else:
         grade = 0
       
