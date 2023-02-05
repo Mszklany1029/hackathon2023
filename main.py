@@ -84,6 +84,7 @@ def main():
     for time in nextDJ.preferred_time:
       if(sched.isOpen(time[0], time[1])):
         sched.assignTime(time[0], time[1], nextDJ.name)
+        nextDJ.scheduled = True
         pref = True
         break
     if(not pref):
@@ -91,6 +92,7 @@ def main():
         if(sched.isOpen(time[0], time[1])):
           sched.assignTime(time[0], time[1], nextDJ.name)
           nonfinalized.append([time[0], time[1], nextDJ])
+          nextDJ.scheduled = True
           pref = True
           break
     if(not pref):
@@ -102,6 +104,7 @@ def main():
             sched.assignTime(movableDJ[0], movableDJ[1], nextDJ.name)
             movableDJ[0] = time[0]
             movableDJ[1] = time[1]
+            nextDJ.scheduled = True
             found = True
             pref = True
             break
