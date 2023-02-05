@@ -134,8 +134,7 @@ class Schedule:
         self.week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
     def isOpen(self, dayOfWeek, time):
-        weekIndex = self.week.index(dayOfWeek)
-        return self.schedule[weekIndex][time] == ""
+        return self.schedule[dayOfWeek][time] == ""
 
     def show(self):
         print(tabulate(self.schedule, headers = "keys", tablefmt = "grid", showindex=self.week))
