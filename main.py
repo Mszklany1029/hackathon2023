@@ -2,6 +2,7 @@
 #import numpy as np
 import csv
 import itertools
+import sys
 from person import Person
 from HeapManager import HeapManager
 from schedule import Schedule
@@ -9,7 +10,8 @@ from schedule import Schedule
 def main():
   sched = Schedule()
   personList = []
-  with open('data/show request form sample - Form Responses 1.csv') as csv_file:
+  file = sys.argv[1]
+  with open(file) as csv_file:
     reader = csv.reader(csv_file)
     next(reader, None)
     for row in reader:
@@ -78,6 +80,7 @@ def main():
 
   queue = HeapManager(personList)
   nonfinalized = []
+  neglected = []
   pref = False
   nextDJ = queue.getNext()
   while(nextDJ != -1):
@@ -112,10 +115,16 @@ def main():
           break
         if(not found):
           nonfinalized.remove(movableDJ)
+    if(not pref):
+      neglected.append(nextDJ)
+      
 
     pref = False
     nextDJ = queue.getNext()
+
   sched.show()
+  for dj in neglected:
+    print(dj.name)
 
 
  
